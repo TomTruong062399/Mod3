@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2021-2022 Seahawks' Travels</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css' rel='stylesheet'/>
+  </head>
+
+  <body>
+    <h1>2021-2022 Seattle Seahawks' Season Travel Guide</h1>
+    <div id='map'></div>
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoidG9tdHJ1b25nMDYyMzk5IiwiYSI6ImNrcGlvcWdmdDAwc3kyd28xaG94ZTQ3dHcifQ.so-Eaaqhi2JVGIfWDpNjtw';
+
+    var cities = {
+      'type': 'FeatureCollection',
+      'features': [
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-122.341931, 47.571948]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-86.171994, 39.751934]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-86.781931, 36.17192]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-122.341931, 47.571948]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-93.253732, 44.981925]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-122.417169, 37.769196]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-117.181936, 32.82197]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-122.341931, 47.571948]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-80.001931, 40.431944]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-90.041913, 29.996948]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-122.341931, 47.571948]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-81.671933, 30.331967]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-122.341931, 47.571948]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-88.000014, 44.529981]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-112.071938, 33.541926]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-122.341931, 47.571948]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-77.011364, 38.901495]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-122.417169, 37.769196]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-122.341931, 47.571948]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-95.341925, 29.82192]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-117.181936, 32.82197]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-87.752001, 41.831937]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-122.341931, 47.571948]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-83.082002, 42.331906]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-122.341931,47.571948]
+          }
+        },
+        {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [-112.071938, 33.541926]
+          }
+        }
+      ]
+    };
+
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/tomtruong062399/ckphg2rei00a217lmcsowhnzs',
+      center: [-97.7129, 39.0902],
+      zoom: 4,
+      minZoom: 4,
+      maxZoom: 7
+    });
+
+    map.on('load', function(){
+      map.addSource('counties', {
+        "type": "geojson",
+        "data": "data/counties.geojson"
+      });
+
+    map.addLayer({
+      "id": "county",
+      "type": "fill",
+      "source": "counties",
+      "paint": {
+        "fill-color": {
+          "property": "team_id",
+          "stops": [
+            [1, "#69BE28"],
+            [2, "#003087"],
+            [3, "#4B92DB"],
+            [4, "#4F2683"],
+            [5, "#AA0000"],
+            [6, "#003594"],
+            [7, "#101820"],
+            [8, "#D3BC8D"],
+            [9, "#006778"],
+            [10, "#203731"],
+            [11, "#97233F"],
+            [12, "#773141"],
+            [13, "#A71930"],
+            [14, "#C83803"],
+            [15, "#0076B6"]
+          ]
+        },
+        "fill-opacity": 0.45
+      }
+    });
+  });
+
+  map.on('load', function() {
+    cities.features.forEach(function(city, index) {
+      setTimeout(function() {
+        map.flyTo({
+          center: city.geometry.coordinates,
+          zoom: 7,
+          speed: 0.5,
+          curve: 1
+        });
+      }, 7500 * index);
+    });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/seahawks.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('seahawks', image);
+    });
+
+    map.addSource('point1', {
+      "type": "geojson",
+      "data": "data/seahawks.geojson"
+    });
+
+        map.addLayer({
+          "id": "hawks",
+          "type": "symbol",
+          "source": "point1",
+          "layout": {
+            "icon-image": "seahawks",
+            "icon-size": 0.05
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/colts.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('colts', image);
+    });
+
+    map.addSource('point2', {
+      "type": "geojson",
+      "data": "data/colts.geojson"
+    });
+
+        map.addLayer({
+          "id": "colt",
+          "type": "symbol",
+          "source": "point2",
+          "layout": {
+            "icon-image": "colts",
+            "icon-size": 0.07
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/titans.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('titans', image);
+    });
+
+    map.addSource('point3', {
+      "type": "geojson",
+      "data": "data/titans.geojson"
+    });
+
+        map.addLayer({
+          "id": "tits",
+          "type": "symbol",
+          "source": "point3",
+          "layout": {
+            "icon-image": "titans",
+            "icon-size": 0.06
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/vikings.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('vikings', image);
+    });
+
+    map.addSource('point4', {
+      "type": "geojson",
+      "data": "data/vikings.geojson"
+    });
+
+        map.addLayer({
+          "id": "vikes",
+          "type": "symbol",
+          "source": "point4",
+          "layout": {
+            "icon-image": "vikings",
+            "icon-size": 0.07
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/49ers.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('49ers', image);
+    });
+
+    map.addSource('point5', {
+      "type": "geojson",
+      "data": "data/49ers.geojson"
+    });
+
+        map.addLayer({
+          "id": "niners",
+          "type": "symbol",
+          "source": "point5",
+          "layout": {
+            "icon-image": "49ers",
+            "icon-size": 0.07
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/rams.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('rams', image);
+    });
+
+    map.addSource('point6', {
+      "type": "geojson",
+      "data": "data/rams.geojson"
+    });
+
+        map.addLayer({
+          "id": "ram",
+          "type": "symbol",
+          "source": "point6",
+          "layout": {
+            "icon-image": "rams",
+            "icon-size": 0.07
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/steelers.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('steelers', image);
+    });
+
+    map.addSource('point7', {
+      "type": "geojson",
+      "data": "data/steelers.geojson"
+    });
+
+        map.addLayer({
+          "id": "steel",
+          "type": "symbol",
+          "source": "point7",
+          "layout": {
+            "icon-image": "steelers",
+            "icon-size": 0.07
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/saints.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('saints', image);
+    });
+
+    map.addSource('point8', {
+      "type": "geojson",
+      "data": "data/saints.geojson"
+    });
+
+        map.addLayer({
+          "id": "saint",
+          "type": "symbol",
+          "source": "point8",
+          "layout": {
+            "icon-image": "saints",
+            "icon-size": 0.09
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/jaguars.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('jaguars', image);
+    });
+
+    map.addSource('point9', {
+      "type": "geojson",
+      "data": "data/jaguars.geojson"
+    });
+
+        map.addLayer({
+          "id": "jags",
+          "type": "symbol",
+          "source": "point9",
+          "layout": {
+            "icon-image": "jaguars",
+            "icon-size": 0.07
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/packers.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('packers', image);
+    });
+
+    map.addSource('point10', {
+      "type": "geojson",
+      "data": "data/packers.geojson"
+    });
+
+        map.addLayer({
+          "id": "pack",
+          "type": "symbol",
+          "source": "point10",
+          "layout": {
+            "icon-image": "packers",
+            "icon-size": 0.07
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/cardinals.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('cardinals', image);
+    });
+
+    map.addSource('point11', {
+      "type": "geojson",
+      "data": "data/cardinals.geojson"
+    });
+
+        map.addLayer({
+          "id": "cards",
+          "type": "symbol",
+          "source": "point11",
+          "layout": {
+            "icon-image": "cardinals",
+            "icon-size": 0.06
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/football_team.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('football_team', image);
+    });
+
+    map.addSource('point12', {
+      "type": "geojson",
+      "data": "data/football_team.geojson"
+    });
+
+        map.addLayer({
+          "id": "wft",
+          "type": "symbol",
+          "source": "point12",
+          "layout": {
+            "icon-image": "football_team",
+            "icon-size": 0.07
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/texans.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('texans', image);
+    });
+
+    map.addSource('point13', {
+      "type": "geojson",
+      "data": "data/texans.geojson"
+    });
+
+        map.addLayer({
+          "id": "texan",
+          "type": "symbol",
+          "source": "point13",
+          "layout": {
+            "icon-image": "texans",
+            "icon-size": 0.05
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/bears.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('bears', image);
+    });
+
+    map.addSource('point14', {
+      "type": "geojson",
+      "data": "data/bears.geojson"
+    });
+
+        map.addLayer({
+          "id": "bear",
+          "type": "symbol",
+          "source": "point14",
+          "layout": {
+            "icon-image": "bears",
+            "icon-size": 0.05
+          }
+      });
+  });
+
+  map.on('load', function(){
+    map.loadImage('1x/lions.png',
+    function(error, image) {
+      if (error) throw error;
+      map.addImage('lions', image);
+    });
+
+    map.addSource('point15', {
+      "type": "geojson",
+      "data": "data/lions.geojson"
+    });
+
+        map.addLayer({
+          "id": "lion",
+          "type": "symbol",
+          "source": "point15",
+          "layout": {
+            "icon-image": "lions",
+            "icon-size": 0.05
+          }
+      });
+  });
+
+  var popup1 = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'hawks', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'hawks', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'colt', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'colt', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'tits', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'tits', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'vikes', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'vikes', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'niners', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'niners', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'ram', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'ram', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'steel', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'steel', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'saint', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'saint', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'jags', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'jags', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'pack', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'pack', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'cards', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'cards', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'wft', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'wft', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'texan', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'texan', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'bear', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'bear', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+    map.on('mouseenter', 'lion', function (e) {
+      map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : - 360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'lion', function () {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+  });
+
+    </script>
+  </body>
+</html>

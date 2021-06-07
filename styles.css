@@ -1,0 +1,41 @@
+#map {
+  width: 99vw;
+  height: 50vw;
+}
+
+#fly {
+  display: block;
+  position: relative;
+  margin: 0px auto;
+  width: 50%;
+  height: 40px;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  background: #ee8a65;
+}
+
+.mapboxgl-popup {
+  max-width: 400px;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+@font-face {
+  font-family: 'nflFont';
+  src: url("AachenBT-Roman.otf");
+}
+
+body {
+  background-color: rgba(1, 51, 105, 0.7);
+}
+
+h1 {
+  text-align: center;
+  font-family: 'nflFont', sans-serif;
+  color: #A5ACAF;
+  font-weight: lighter;
+}
